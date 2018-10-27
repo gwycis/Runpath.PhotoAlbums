@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Runpath.PhotoAlbums.WebApp.Models.PhotoViewModel>
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Album</h1>
+        <p class="lead text-muted">Number of items is hardcoded to 100, this is due to the fact that API has no support 
+            for paging, so all paging/sorting is Front-End only, which results in 5000 calls to retrieve Thumbnails. 
+            If you wish to change the limit or remove it, please update the value of <em>TotalItemsCount in HomeController</em>.</p>
+    </div>
+</section>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table id="photos" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Album)</th>
+                            <th>@Html.DisplayNameFor(model => model.Title)</th>
+                            <th class="no-sort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var photo in Model) {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => photo.Album)</td>
+                            <td>@Html.DisplayFor(modelItem => photo.Title)</td>
+                            <td>
+                                <a href="@photo.Url" data-toggle="lightbox" data-width="600" data-height="600">
+                                    <img class="img-thumbnail rounded mx-auto d-block" src="@photo.ThumbnailUrl">
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
